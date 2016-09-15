@@ -204,7 +204,7 @@ class Installer {
 			PSM_DB_PREFIX . 'log' => "CREATE TABLE `" . PSM_DB_PREFIX . "log` (
 						  `log_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
 						  `server_id` int(11) unsigned NOT NULL,
-						  `type` enum('status','email','sms','pushover') NOT NULL,
+						  `type` enum('status','email','sms','pushover', 'glip') NOT NULL,
 						  `message` varchar(255) NOT NULL,
 						  `datetime` timestamp NOT NULL default CURRENT_TIMESTAMP,
 						  `user_id` varchar(255) NOT NULL,
