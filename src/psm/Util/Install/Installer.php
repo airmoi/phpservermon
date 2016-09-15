@@ -439,7 +439,9 @@ class Installer {
 
 		psm_update_conf('password_encrypt_key', sha1(microtime()));
 		$queries[] = "ALTER TABLE `" . PSM_DB_PREFIX . "servers` CHANGE `ip` `ip` VARCHAR(500) NOT NULL;";
-		$queries[] = "ALTER TABLE `" . PSM_DB_PREFIX . "servers` ADD `website_username` varchar(255) NULL, ADD `website_password` varchar(255) NULL AFTER `website_username`;";
+		$queries[] = "ALTER TABLE `" . PSM_DB_PREFIX . "log` CHANGE `type` `type` enum('status','email','sms','pushover', 'glip') NOT NULL;";				  
+		$queries[] = "ALTER TABLE `" . PSM_DB_PREFIX . "users` ADD `glip_key` varchar(255) NOT NULL;";
+		$queries[] = "ALTER TABLE `" . PSM_DB_PREFIX . "servers` ADD `website_username` varchar(255) NULL, ADD `website_password` varchar(255) NULL AFTER `website_username`, ADD `glip` enum('yes','no') NOT NULL default 'yes'  AFTER `pushover`;";
 
 		$this->execSQL($queries);
 	}
