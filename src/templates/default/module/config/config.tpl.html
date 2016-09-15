@@ -266,6 +266,25 @@
             </div>
 		</fieldset>
 		</div>
+            <div id="config-glip" class="tab-pane {{ glip_active }}">
+		<fieldset>
+          <legend>{{ label_settings_glip }}</legend>
+            <div class="control-group">
+                <div class="controls">
+					<label class="checkbox" for="glip_status"><input type="checkbox" id="glip_status" name="glip_status[]" {{ glip_status_checked|raw }} /> {{ label_glip_status }}</label>
+					<p class="help-block">{{ label_glip_description|raw }}</p>
+				</div>
+            </div>
+            <div class="control-group">
+				<div class="controls">
+					<label class="checkbox"><input type="checkbox" id="log_glip" name="log_glip[]" {{ log_glip_checked|raw }} /> {{ label_log_glip }}</label>
+				</div>
+			</div>
+            <div class="form-actions">
+                <button class="btn btn-success" type="submit" name="glip_submit">{{ label_save }}</button>
+            </div>
+		</fieldset>
+		</div>
 	</div>
 	{{ macro.csrf_input() }}
 </form>
