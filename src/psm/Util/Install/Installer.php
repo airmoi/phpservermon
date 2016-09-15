@@ -185,6 +185,7 @@ class Installer {
 							`mobile` varchar(15) NOT NULL,
 							`pushover_key` varchar(255) NOT NULL,
 							`pushover_device` varchar(255) NOT NULL,
+							`glip_key` varchar(255) NOT NULL,
 							`email` varchar(255) NOT NULL,
 							PRIMARY KEY (`user_id`),
 							UNIQUE KEY `unique_username` (`user_name`)
@@ -225,6 +226,7 @@ class Installer {
 						  `email` enum('yes','no') NOT NULL default 'yes',
 						  `sms` enum('yes','no') NOT NULL default 'no',
 						  `pushover` enum('yes','no') NOT NULL default 'yes',
+						  `glip` enum('yes','no') NOT NULL default 'yes',
                           `warning_threshold` mediumint(1) unsigned NOT NULL DEFAULT '1',
                           `warning_threshold_counter` mediumint(1) unsigned NOT NULL DEFAULT '0',
                           `timeout` smallint(1) unsigned NULL DEFAULT NULL,

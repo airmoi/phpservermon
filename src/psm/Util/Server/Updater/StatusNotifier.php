@@ -61,6 +61,12 @@ class StatusNotifier {
 	protected $send_pushover = false;
 
 	/**
+	 * Send to Glip ?
+	 * @var boolean $send_pushover
+	 */
+	protected $send_glip = false;
+
+	/**
 	 * Save log records?
 	 * @var boolean $save_log
 	 */
@@ -96,6 +102,7 @@ class StatusNotifier {
 		$this->send_emails = psm_get_conf('email_status');
 		$this->send_sms = psm_get_conf('sms_status');
 		$this->send_pushover = psm_get_conf('pushover_status');
+		$this->send_glip = psm_get_conf('glip_status');
 		$this->save_logs = psm_get_conf('log_status');
 	}
 
@@ -108,7 +115,7 @@ class StatusNotifier {
 	 * @return boolean
 	 */
 	public function notify($server_id, $status_old, $status_new) {
-		if(!$this->send_emails && !$this->send_sms && !$this->save_logs) {
+		if(!$this->send_emails && !$this->send_sms && !$this->send_pushover && !$this->send_glip  && !$this->save_logs) {
 			// seems like we have nothing to do. skip the rest
 			return false;
 		}
@@ -121,7 +128,7 @@ class StatusNotifier {
 		$this->server = $this->db->selectRow(PSM_DB_PREFIX . 'servers', array(
 			'server_id' => $server_id,
 		), array(
-			'server_id', 'ip', 'port', 'label', 'type', 'pattern', 'status', 'error', 'active', 'email', 'sms', 'pushover',
+			'server_id', 'ip', 'port', 'label', 'type', 'pattern', 'status', 'error', 'active', 'email', 'sms', 'pushover', 'glip',
 		));
 		if(empty($this->server)) {
 			return false;
@@ -186,6 +193,12 @@ class StatusNotifier {
 		if($this->send_pushover && $this->server['pushover'] == 'yes') {
 			// yay lets wake those nerds up!
 			$this->notifyByPushover($users);
+		}
+
+		// check if pushover is enabled for this server
+		if($this->send_glip && $this->server['glip'] == 'yes') {
+			// yay lets wake those nerds up!
+			$this->notifyByGlip($users);
 		}
 
 		return $notify;
@@ -263,6 +276,33 @@ class StatusNotifier {
 	    if(psm_get_conf('log_pushover')) {
 	    	psm_add_log($this->server_id, 'pushover', $message, implode(',', $userlist));
 	    }
+	}/**
+	 * This functions performs the pushover notifications
+	 *
+	 * @param array $users
+	 * @return boolean
+	 */
+	protected function notifyByGlip($users) {
+		$userlist = array();
+		
+		$message = str_replace('<br/>', "\n", psm_parse_msg($this->status_new, 'pushover_message', $this->server));
+		$title = psm_parse_msg($this->status_new, 'pushover_title', $this->server);
+                $activity = psm_parse_msg($this->status_new, 'glip_activity', $this->server);
+                $icon_url = "http://projectman.1-more-thing.com/themes/circle/images/logo1MT.png";
+
+                foreach($users as $user) {
+			if(trim($user['glip_key']) == '') {
+				continue;
+			}
+                        $webhook_url = $user['glip_key'];
+			$userlist[] = $user['user_id'];
+			
+                        $this->postToGlip($webhook_url, $icon_url, $activity ,$title, $message);
+                }
+
+                if(psm_get_conf('log_glip')) {
+                    psm_add_log($this->server_id, 'glip', $message, implode(',', $userlist));
+                }
 	}
 
 	/**
@@ -306,7 +346,7 @@ class StatusNotifier {
 	public function getUsers($server_id) {
 		// find all the users with this server listed
 		$users = $this->db->query("
-			SELECT `u`.`user_id`, `u`.`name`,`u`.`email`, `u`.`mobile`, `u`.`pushover_key`, `u`.`pushover_device`
+			SELECT `u`.`user_id`, `u`.`name`,`u`.`email`, `u`.`mobile`, `u`.`pushover_key`, `u`.`pushover_device`, `u`.`glip_key`
 			FROM `".PSM_DB_PREFIX."users` AS `u`
 			JOIN `".PSM_DB_PREFIX."users_servers` AS `us` ON (
 				`us`.`user_id`=`u`.`user_id`
@@ -315,4 +355,29 @@ class StatusNotifier {
 		");
 		return $users;
 	}
+        
+        protected function postToGlip($webhook_url, $icon_url, $activity, $title, $message){
+            $glip_activity = array(
+            'icon' => $icon_url,
+            'activity' => $activity,
+            'title' => $title,
+            'body' => $message,
+            );
+            $json_message = json_encode($glip_activity);
+            //Send the JSON data to the server
+            $ch = curl_init($webhook_url);
+            //curl_setopt($ch, CURLOPT_URL, $webhook_url);
+            curl_setopt($ch, CURLOPT_HEADER, false);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+            curl_setopt($ch, CURLOPT_POST, 1);
+            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+            curl_setopt($ch, CURLOPT_HTTPHEADER, array("Content-Type: application/json"));
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $json_message);
+            $data = curl_exec($ch);
+            if(!$data){
+                $error = curl_error($ch);
+                psm_add_log($this->server_id, 'glip', 'cURL ERROR : ' . $error);
+            }
+            curl_close($ch);
+        }
 }
