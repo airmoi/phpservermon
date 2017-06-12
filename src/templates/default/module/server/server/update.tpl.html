@@ -139,6 +139,17 @@
 				</select>
 			</div>
 		</div>
+		<div class="control-group {{ control_class_glip }}">
+			<label class="control-label" for="glip">{{ label_glip }}
+			{% if warning_glip %} <p class="help-inline"><i class="icon-warning-sign" data-toggle="tooltip" title="{{ label_warning_glip }}"></i></p> {% endif %}
+			</label>
+			<div class="controls">
+				<select id="glip" name="glip">
+					<option value="yes" {{ edit_glip_selected_yes|raw }}>{{ label_yes }}</option>
+					<option value="no" {{ edit_glip_selected_no|raw }}>{{ label_no }}</option>
+				</select>
+			</div>
+		</div>
 	</fieldset>
 
 	<fieldset>

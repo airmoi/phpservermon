@@ -189,6 +189,7 @@ class Installer {
 							`mobile` varchar(15) NOT NULL,
 							`pushover_key` varchar(255) NOT NULL,
 							`pushover_device` varchar(255) NOT NULL,
+							`glip_key` varchar(255) NOT NULL,
 							`email` varchar(255) NOT NULL,
 							PRIMARY KEY (`user_id`),
 							UNIQUE KEY `unique_username` (`user_name`)
@@ -207,9 +208,10 @@ class Installer {
 			PSM_DB_PREFIX . 'log' => "CREATE TABLE `" . PSM_DB_PREFIX . "log` (
 						  `log_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
 						  `server_id` int(11) unsigned NOT NULL,
-						  `type` enum('status','email','sms','pushover') NOT NULL,
+						  `type` enum('status','email','sms','pushover', 'glip') NOT NULL,
 						  `message` varchar(255) NOT NULL,
 						  `datetime` timestamp NOT NULL default CURRENT_TIMESTAMP,
+						  `user_id` varchar(255) NOT NULL,
 						  PRIMARY KEY  (`log_id`)
 						) ENGINE=MyISAM  DEFAULT CHARSET=utf8;",
             PSM_DB_PREFIX . 'log_users' => "CREATE TABLE `" . PSM_DB_PREFIX . "log_users` (
@@ -233,6 +235,7 @@ class Installer {
 						  `email` enum('yes','no') NOT NULL default 'yes',
 						  `sms` enum('yes','no') NOT NULL default 'no',
 						  `pushover` enum('yes','no') NOT NULL default 'yes',
+						  `glip` enum('yes','no') NOT NULL default 'yes',
                           `warning_threshold` mediumint(1) unsigned NOT NULL DEFAULT '1',
                           `warning_threshold_counter` mediumint(1) unsigned NOT NULL DEFAULT '0',
                           `timeout` smallint(1) unsigned NULL DEFAULT NULL,
@@ -451,31 +454,10 @@ class Installer {
 					('proxy_url', ''),
 					('proxy_user', ''),
 					('proxy_password', '');";
+		$queries[] = "ALTER TABLE `" . PSM_DB_PREFIX . "log` CHANGE `type` `type` enum('status','email','sms','pushover', 'glip') NOT NULL;";
+		$queries[] = "ALTER TABLE `" . PSM_DB_PREFIX . "users` ADD `glip_key` varchar(255) NOT NULL;";
+		$queries[] = "ALTER TABLE `" . PSM_DB_PREFIX . "servers` ADD `glip` enum('yes','no') NOT NULL default 'yes'  AFTER `pushover`;";
 
 		$this->execSQL($queries);
-
-    // Create log_users table
-        $this->execSQL("CREATE TABLE `" . PSM_DB_PREFIX . "log_users` (
-                        `log_id`  int(11) UNSIGNED NOT NULL ,
-                        `user_id`  int(11) UNSIGNED NOT NULL ,
-                        PRIMARY KEY (`log_id`, `user_id`)
-                      ) ENGINE=MyISAM DEFAULT CHARSET=utf8;");
-
-        // Migrate the data
-        $logs = $this->db->select(PSM_DB_PREFIX . 'log', null, array('log_id', 'user_id'));
-        foreach ($logs as $log) {
-            // Validation
-            if (empty($log['user_id']) || trim($log['user_id']) == '') {
-                continue;
-            }
-
-            // Insert into new table
-            foreach (explode(',', $log['user_id']) as $user_id) {
-                psm_add_log_user($log['log_id'], $user_id);
-            }
-        }
-
-        // Drop old user_id('s) column
-        $this->execSQL("ALTER TABLE `" . PSM_DB_PREFIX . "log` DROP COLUMN `user_id`;");
 	}
 }
