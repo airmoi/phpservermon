@@ -35,7 +35,7 @@ class ProfileController extends AbstractController {
 	 * Editable fields for the profile
 	 * @var array $profile_fields
 	 */
-	protected $profile_fields = array('name', 'user_name', 'mobile', 'pushover_key', 'pushover_device', 'email');
+	protected $profile_fields = array('name', 'user_name', 'mobile', 'pushover_key', 'pushover_device', 'glip_key', 'email');
 
 	function __construct(Database $db, \Twig_Environment $twig) {
 		parent::__construct($db, $twig);
@@ -61,6 +61,9 @@ class ProfileController extends AbstractController {
 			'label_password_repeat' => psm_get_lang('users', 'password_repeat'),
 			'label_level' => psm_get_lang('users', 'level'),
 			'label_mobile' => psm_get_lang('users', 'mobile'),
+			'label_glip' => psm_get_lang('users', 'glip'),
+			'label_glip_description' => psm_get_lang('users', 'glip_description'),
+			'label_glip_key' => psm_get_lang('users', 'glip_key'),
 			'label_pushover' => psm_get_lang('users', 'pushover'),
 			'label_pushover_description' => psm_get_lang('users', 'pushover_description'),
 			'label_pushover_key' => psm_get_lang('users', 'pushover_key'),

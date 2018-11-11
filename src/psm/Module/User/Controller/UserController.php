@@ -89,7 +89,7 @@ class UserController extends AbstractController {
 		$users = $this->db->select(
 			PSM_DB_PREFIX.'users',
 			null,
-			array('user_id', 'user_name', 'level', 'name', 'mobile', 'pushover_key', 'pushover_device', 'email'),
+			array('user_id', 'user_name', 'level', 'name', 'mobile', 'pushover_key', 'pushover_device', 'glip_key','email'),
 			null,
 			array('name')
 		);
@@ -215,7 +215,7 @@ class UserController extends AbstractController {
 		}
 		$user_id = (isset($_GET['id'])) ? intval($_GET['id']) : 0;
 
-		$fields = array('name', 'user_name', 'password', 'password_repeat', 'level', 'mobile', 'pushover_key', 'pushover_device', 'email');
+		$fields = array('name', 'user_name', 'password', 'password_repeat', 'level', 'mobile', 'pushover_key', 'pushover_device', 'glip_key', 'email');
 		$clean = array();
 		foreach($fields as $field) {
 			if(isset($_POST[$field])) {
