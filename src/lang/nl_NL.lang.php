@@ -27,7 +27,11 @@
 
 $sm_lang = array(
 	'name' => 'Nederlands - Dutch',
-	'locale' => array('nl_NL.UTF-8', 'nl_NL', 'dutch'),
+	'locale' => array(
+		'0' => 'nl_NL.UTF-8',
+		'1' => 'nl_NL',
+		'2' => 'dutch',
+	),
 	'locale_tag' => 'nl',
 	'locale_dir' => 'ltr',
 	'system' => array(
@@ -47,8 +51,8 @@ $sm_lang = array(
 		'back_to_top' => 'Terug naar boven',
 		'go_back' => 'Terug',
 		'ok' => 'OK',
+		'bad' => 'niet goed',
 		'cancel' => 'Cancel',
-		// date/time format according the strftime php function format parameter http://php.net/manual/function.strftime.php
 		'short_day_format' => '%B %e',
 		'long_day_format' => '%B %e, %Y',
 		'yesterday_format' => 'Gisteren om %k:%M',
@@ -60,6 +64,18 @@ $sm_lang = array(
 		'a_minute_ago' => 'een minuut geleden',
 		'seconds_ago' => '%d seconden geleden',
 		'a_second_ago' => 'een seconde geleden',
+		'year' => 'year',
+		'years' => 'years',
+		'month' => 'month',
+		'months' => 'months',
+		'day' => 'day',
+		'days' => 'days',
+		'hour' => 'hour',
+		'hours' => 'hours',
+		'minute' => 'minute',
+		'minutes' => 'minutes',
+		'second' => 'second',
+		'seconds' => 'seconds',
 	),
 	'menu' => array(
 		'config' => 'Configuratie',
@@ -96,7 +112,7 @@ $sm_lang = array(
 		'profile' => 'Profiel',
 		'profile_updated' => 'Je profiel is bijgewerkt.',
 		'error_user_name_bad_length' => 'Een gebruikersnaam moet tussen de 2 en 64 tekens zijn.',
-		'error_user_name_invalid' => 'Een gebruikersnaam mag alleen alfabetische tekens (a-z, A-Z), cijfers (0-9) en underscores (_) bevatten.',
+		'error_user_name_invalid' => 'Een gebruikersnaam mag alleen alfabetische tekens (a-z, A-Z), cijfers (0-9), punten (.) en underscores (_) bevatten.',
 		'error_user_name_exists' => 'De opgegeven gebruikersnaam bestaat al.',
 		'error_user_email_bad_length' => 'Een email adres moet tussen de 5 en 255 tekens zijn.',
 		'error_user_email_invalid' => 'Het email adres is ongeldig.',
@@ -112,7 +128,10 @@ $sm_lang = array(
 		'email' => 'Email',
 		'sms' => 'SMS',
 		'pushover' => 'Pushover',
-		'no_logs' => 'No logs',
+		'no_logs' => 'Geen logs',
+		'clear' => 'Logboek opschonen',
+		'delete_title' => 'Logboek opschonen',
+		'delete_message' => 'Weet je zeker dat je <b>alle</b> logs wilt opschonen?',
 	),
 	'servers' => array(
 		'server' => 'Server',
@@ -127,8 +146,13 @@ $sm_lang = array(
 		'type_service' => 'Service',
 		'pattern' => 'Zoek voor tekst/regex',
 		'pattern_description' => 'Als dit patroon niet gevonden wordt op de website, zal de server als offline gemarkeerd worden. Regular expressions zijn toegestaan.',
+		'redirect_check' => 'Omleiden naar een ander domein is',
+		'redirect_check_description' => 'Een omleiding naar een ander domein is meestal een slecht teken.',
+		'allow_http_status' => 'Sta HTTP status code toe',
+		'allow_http_status_description' => 'Markeer website als online. HTTP status code lager dan 400 worden standaard als online gemarkeerd. Scheiden met |. Bijvoorbeeld: 401|403.',
 		'last_check' => 'Laatst gecontroleerd',
 		'last_online' => 'Laatst online',
+		'last_offline' => 'Laatst offline',
 		'monitoring' => 'Monitoring',
 		'no_monitoring' => 'Geen monitoring',
 		'email' => 'Email',
@@ -156,7 +180,6 @@ $sm_lang = array(
 		'warning_threshold_description' => 'Aantal mislukte pogingen voordat de server als offline gemarkeerd wordt.',
 		'chart_last_week' => 'Afgelopen week',
 		'chart_history' => 'Geschiedenis',
-		// Charts date format according jqPlot date format  http://www.jqplot.com/docs/files/plugins/jqplot-dateAxisRenderer-js.html
 		'chart_day_format' => '%d-%m-%Y',
 		'chart_long_date_format' => '%d-%m-%Y %H:%M:%S',
 		'chart_short_date_format' => '%d-%m %H:%M',
@@ -189,17 +212,6 @@ $sm_lang = array(
 		'email_smtp_noauth' => 'Laat leeg voor geen authenticatie',
 		'sms_status' => 'Sta SMS berichten toe?',
 		'sms_gateway' => 'Gateway voor het sturen van SMS',
-		'sms_gateway_mosms' => 'Mosms',
-		'sms_gateway_mollie' => 'Mollie',
-		'sms_gateway_spryng' => 'Spryng',
-		'sms_gateway_inetworx' => 'Inetworx',
-		'sms_gateway_clickatell' => 'Clickatell',
-        'sms_gateway_textmarketer' => 'Textmarketer',
-		'sms_gateway_smsglobal' => 'SMSGlobal',
-		'sms_gateway_octopush' => 'Octopush',
-		'sms_gateway_smsit' => 'Smsit',
-		'sms_gateway_freevoipdeal' => 'FreeVoipDeal',
-		'sms_gateway_nexmo' => 'Nexmo',
 		'sms_gateway_username' => 'Gateway gebruikersnaam',
 		'sms_gateway_password' => 'Gateway wachtwoord',
 		'sms_from' => 'Telefoonnummer afzender',
@@ -209,14 +221,7 @@ $sm_lang = array(
 		'pushover_api_token' => 'Pushover App API Token',
 		'pushover_api_token_description' => 'Voordat je Pushover kunt gebruiken moet je een <a href="%1$s" target="_blank">App registreren</a> via hun website, en daarvan de App API Token hier invullen.',
 		'alert_type' => 'Selecteer wanneer je een notificatie wilt',
-		'alert_type_description' => '<b>Status verandert:</b> '.
-			'Je ontvangt alleen bericht wanneer een server van status verandert. Dus van online -> offline of offline -> online.<br/>'.
-			 '<br /><b>Offline:</b> '.
-			'Je ontvangt bericht wanneer een server offline gaat voor de *EERSTE KEER*. Bijvoorbeeld, '.
-			'je cronjob draait iedere 15 min en je server gaat down om 01:00 en blijft offline tot 06:00. '.
-			'Je krijgt 1 bericht om 01:00 en dat is het.<br/>'.
-			'<br/><b>Altijd:</b> '.
-			'Je krijgt een bericht elke keer dat het script draait en een website is down, ook al is de site al een paar uur offline.',
+		'alert_type_description' => '<b>Status verandert:</b> Je ontvangt alleen bericht wanneer een server van status verandert. Dus van online -> offline of offline -> online.<br/><br /><b>Offline:</b> Je ontvangt bericht wanneer een server offline gaat voor de *EERSTE KEER*. Bijvoorbeeld, je cronjob draait iedere 15 min en je server gaat down om 01:00 en blijft offline tot 06:00. Je krijgt 1 bericht om 01:00 en dat is het.<br/><br/><b>Altijd:</b> Je krijgt een bericht elke keer dat het script draait en een website is down, ook al is de site al een paar uur offline.',
 		'alert_type_status' => 'Status verandering',
 		'alert_type_offline' => 'Offline',
 		'alert_type_always' => 'Altijd',
@@ -235,11 +240,7 @@ $sm_lang = array(
 		'settings_notification' => 'Notificatie instellingen',
 		'settings_log' => 'Log instellingen',
 		'auto_refresh' => 'Auto-refresh',
-		'auto_refresh_servers' =>
-			'Auto-herladen servers pagina.<br/>'.
-			'<span class="small">'.
-			'Tijd in seconden, als de tijd 0 is wordt de pagina niet ververst.'.
-			'</span>',
+		'auto_refresh_servers' => 'Auto-herladen servers pagina.<br/><span class="small">Tijd in seconden, als de tijd 0 is wordt de pagina niet ververst.</span>',
 		'seconds' => 'seconden',
 		'test' => 'Test',
 		'test_email' => 'Er zal een email verstuurd worden naar het email adres in je profiel.',
@@ -251,7 +252,7 @@ $sm_lang = array(
 		'email_sent' => 'Email verzonden',
 		'email_error' => 'Er is een fout opgetreden tijdens het verzenden',
 		'sms_sent' => 'SMS verzonden',
-		'sms_error' => 'Er is een fout opgetreden tijdens het verzenden',
+		'sms_error' => 'Er is een fout opgetreden tijdens het verzenden. %s',
 		'sms_error_nomobile' => 'Kan test SMS niet verzenden: er is geen telefoonnummer ingevuld in je profiel.',
 		'pushover_sent' => 'Pushover notificatie verzonden',
 		'pushover_error' => 'De volgende fout is opgetreden bij het versturen van de Pushover notificatie: %s',
@@ -261,18 +262,17 @@ $sm_lang = array(
 		'log_retention_period_description' => 'Aantal dagen dat logs van notificaties en archieven van server uptime worden bewaard. Vul 0 in om log opruiming uit te zetten.',
 		'log_retention_days' => 'dagen',
 	),
-	// for newlines in the email messages use <br/>
 	'notifications' => array(
 		'off_sms' => 'Server %LABEL% is DOWN: ip=%IP%, poort=%PORT%. Fout=%ERROR%',
 		'off_email_subject' => 'BELANGRIJK: Server %LABEL% is DOWN',
-		'off_email_body' => "De server kon niet worden bereikt:<br/><br/>Server: %LABEL%<br/>IP: %IP%<br/>Poort: %PORT%<br/>Fout: %ERROR%<br/>Datum: %DATE%",
+		'off_email_body' => 'De server kon niet worden bereikt:<br/><br/>Server: %LABEL%<br/>IP: %IP%<br/>Poort: %PORT%<br/>Fout: %ERROR%<br/>Datum: %DATE%',
 		'off_pushover_title' => 'Server %LABEL% is DOWN',
-		'off_pushover_message' => "De server kon niet worden bereikt:<br/><br/>Server: %LABEL%<br/>IP: %IP%<br/>Poort: %PORT%<br/>Fout: %ERROR%<br/>Datum: %DATE%",
-		'on_sms' => 'Server %LABEL% is RUNNING: ip=%IP%, poort=%PORT%',
+		'off_pushover_message' => 'De server kon niet worden bereikt:<br/><br/>Server: %LABEL%<br/>IP: %IP%<br/>Poort: %PORT%<br/>Fout: %ERROR%<br/>Datum: %DATE%',
+		'on_sms' => 'Server %LABEL% is RUNNING: ip=%IP%, poort=%PORT%,  tijd offline=%LAST_OFFLINE_DURATION%',
 		'on_email_subject' => 'BELANGRIJK: Server %LABEL% is RUNNING',
-		'on_email_body' => "Server %LABEL% is weer online:<br/><br/>Server: %LABEL%<br/>IP: %IP%<br/>Poort: %PORT%<br/>Datum: %DATE%",
+		'on_email_body' => 'Server %LABEL% is na %LAST_OFFLINE_DURATION% weer online:<br/><br/>Server: %LABEL%<br/>IP: %IP%<br/>Poort: %PORT%<br/>Datum: %DATE%',
 		'on_pushover_title' => 'Server %LABEL% is RUNNING',
-		'on_pushover_message' => "Server %LABEL% is weer online:<br/><br/>Server: %LABEL%<br/>IP: %IP%<br/>Poort: %PORT%<br/>Datum: %DATE%",
+		'on_pushover_message' => 'Server %LABEL% is na %LAST_OFFLINE_DURATION% weer online:<br/><br/>Server: %LABEL%<br/>IP: %IP%<br/>Poort: %PORT%<br/>Datum: %DATE%',
 	),
 	'login' => array(
 		'welcome_usermenu' => 'Welkom, %user_name%',

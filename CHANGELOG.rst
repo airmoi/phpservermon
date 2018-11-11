@@ -2,10 +2,109 @@ Changelog
 =========
 
 
-not yet released
+Not yet released
 ----------------
 
+* #656: Downgraded symfony/filesystem to ~3.4 (PHP 5.5.9 compatible) and added 7.0.8 as minimal PHP7 version.
+* #620: Added updater.sh shell script.
+* #653: Fixes wrong default type in upgrade/install query.
+* #642: Added post field as addition to #631.
+* #644: Fixed urlencoding in Nexmo message
+* #639: Added combined notifications.
+* #626: Added redirect check.
+* #627: Latest server output, error and output during a failure will be saved and are shown on the server page.
+* #631: Added option to specify the request method.
+* #628: Added the option to mark specific HTTP status codes as online.
+* #640: Removed () after last offline value when the last offline duration is unknown.
+* #637: Added php extensions to composer required list, spelling fixes in changelog and composer update.
+* #635: Changed server order on ?&mod=user&action=edit&id=x.
+* #634: Changed ' to " in sql query, both were used.
+* #629: Fix bug that made it impossible to check rdp:// and fixed port update.
+* b49659f: Added question to notification faq about not receiving notifications.
+* ef28908: Indentation fix.
+* #605: Added Norwegian language.
+* f6173d4: Added license to composer.json file.
 
+v3.3.1 (released August 10, 2018)
+--------------------------------
+
+* #403: Removed default mysql port settings from files and left empty values.
+* 5e61d89: Defined $encrypted_password.
+* ce8182e: Updated composer.lock.
+* 51ef755: Removed last_offline_duration = "" bug.
+* 6534749: Added last offline duration to all translations.
+* e4bade3: Updated PHPMailer namespace.
+* d2dda8a: Removed duplicate from Russian translation.
+* #613: Updated Russian translation.
+* f21f3db: Typo fix, removed unused code & updated documentation.
+* 476c59e: Update required PHP version to 5.5.9.
+* 1c984b3: Update documentation, added some small changes.
+* eac8ebc: Fixed sms error check.
+* e2c424e: Spacing, indentation and braces.
+* a05d36d: Fixed typos & removed unused code.
+* 3023c83: Changed die() to trigger_error().
+* a96e1e5: Removed eval(), redone get & load language functions.
+* b0ea7eb: Added forgotten translation.
+* 92e8312: Removed unused code.
+* fc84c06: Added cronjob over web to documentation. Changed HTMl error to 403.
+* 93b324f: Security update symfony/http-foundation.
+* dd56e29: Update composer.phar to new version.
+* b98a4af: Typo fix.
+
+v3.3.0 (released May 30, 2018)
+--------------------------------
+
+* 57f4c36: Added support for the following SMS gateways: Plivo, SolutionsInfini, Callr and GatewayAPI.
+* c3751e7: Moved Clickatell api key to password field.
+* #590: Rollback Twig version update to work with PHP5.
+* #589: Enlarge select pattern_online width.
+* 3c55a35: Allow ping by hostname.
+* #579: Added support for "site online when pattern not found".
+* #587: Added __MACOSX/ to .gitignore.
+* a496874, 62254a5 and 57f4c36: Rewritten global and gateway specific SMS gateway functions.
+* 8ca259d: Updated list of available SMS gateways.
+* d64f27f: Add CM Telecom bulk SMS gateway.
+* 0580e75: Added last offline and the duration of the last outage.
+* 3a005f2: Fixing #580 removed results block.
+* 79742fe: Fixed ping error: Failed to parse address &quot;8.8.8.8&quot;.
+* fc4ffd6: Added Twilio and Telegram to notification list and changed URL to download the latest release.
+* #571: Update several dependencies.
+* #569: Added support for Twilio SMS gateway.
+* a80452d: Added Telegram and Pushover to inline documentation.
+* 526c252: Added noopener to external link.
+* 64b4d60: Added activation process for Telegram notifications.
+* 67632ab: Added Telegram notifications to the documentation.
+* 7059ac6: Defined latency for new added servers.
+* 11a021e: Fixed indentation fail #515.
+* #550: Fix urlencode bug when sending SMS using FreeMobileSMS.
+* #541: Fix method declaration error in PHP7.2.
+* #515: Run archive and cleanup per server to reduce memory use.
+* #516: Fixed #500 ping latency.
+* 2471767: Fixed pre installed server query.
+
+v3.2.2 (released March 27, 2018)
+--------------------------------
+
+* #554: Implemented Telegram notifications.
+* #505: Added button to clear the logs.
+* #436: Nexmo.class.php updates to Nexmo.php.
+* #350: Removed utf8_decode.
+* Updated credits.
+* #535: Updated Japanese translation.
+* #502: Fixed database population bug during installation.
+* #512: Added username validation during installation and added the dot (.) to allowed characters.
+* #475: Added Japanese translation.
+
+v3.2.1 (released March 27, 2018)
+--------------------------------
+
+* #343: Added optional header value check.
+* #433: Changed baseurl repoforgeextras.
+* #432: Changed baseurl repoforge.
+* #437: Octopush.class.php updates to Octopush.php.
+* #435: Added Nexmo SMS to list in config.tpl.html.
+* #464: Updated attributes pushover_key and pushover_device in update.tpl.html.
+* #454: Updated HistoryGraph.php timestamp to number_format.
 
 v3.2.0 (released April 15, 2017)
 --------------------------------
@@ -20,10 +119,10 @@ v3.2.0 (released April 15, 2017)
 * #164: Added support for FreeVoipDeal SMS gateway <http://www.freevoipdeal.com>.
 * #181: Added blank index files to prevent directory listing.
 * #237: Adding CSRF protection.
-* #287: Default language - English
-* #286: Add popular ports drop down
-* #269: Added Slovenian language 
-* #96:  Authentication for website checks
+* #287: Default language - English.
+* #286: Add popular ports drop down.
+* #269: Added Slovenian language.
+* #96:  Authentication for website checks.
 
 
 v3.1.1 (released November 6, 2014)

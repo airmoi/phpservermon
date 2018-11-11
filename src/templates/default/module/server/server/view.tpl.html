@@ -50,6 +50,10 @@
 			<td>{{ last_online }}</td>
 		</tr>
 		<tr>
+			<td>{{ label_last_offline }}:</td>
+			<td>{{ last_offline }} {{ last_offline_duration }}</td>
+		</tr>		
+		<tr>
 			<td>{{ label_rtime }}:</td>
 			<td>{{ rtime }} s</td>
 		</tr>
@@ -70,6 +74,10 @@
 			<td>{{ pushover }}</td>
 		</tr>
 		<tr>
+			<td>{{ label_telegram }}:</td>
+			<td>{{ telegram }}</td>
+		</tr>
+		<tr>
 			<td>{{ label_timeout }}:</td>
 			<td>{{ timeout }} s</td>
 		</tr>
@@ -84,6 +92,22 @@
 				******
 				{% endif %}
 			</td>
+		</tr>
+		<tr>
+			<td id="advanced">{{ label_advanced }}&nbsp;<i class="icon-expand-arrow"></i></td>
+			<td>&nbsp;</td>
+		</tr>
+		<tr class="advanced">
+			<td>{{ label_last_error }}:</td>
+			<td>{{ last_error }}</td>
+		</tr>
+		<tr class="advanced">
+				<td>{{ label_last_output }}:</td>
+				<td>{{ last_output }}</td>
+			</tr>
+		<tr class="advanced">
+			<td>{{ label_last_error_output }}:</td>
+			<td>{{ last_error_output }}</td>
 		</tr>
 		{% if has_admin_actions %}
 		<tr>

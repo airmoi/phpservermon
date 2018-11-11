@@ -60,6 +60,18 @@ $sm_lang = array(
 		'a_minute_ago' => '1分钟前',
 		'seconds_ago' => '%d 秒前',
 		'a_second_ago' => '刚刚',
+		'year' => 'year',
+		'years' => 'years',
+		'month' => 'month',
+		'months' => 'months',
+		'day' => 'day',
+		'days' => 'days',
+		'hour' => 'hour',
+		'hours' => 'hours',
+		'minute' => 'minute',
+		'minutes' => 'minutes',
+		'second' => 'second',
+		'seconds' => 'seconds',
 	),
 	'menu' => array(
 		'config' => '设置',
@@ -96,7 +108,7 @@ $sm_lang = array(
 		'profile' => '个人资料',
 		'profile_updated' => '个人资料已更新.',
 		'error_user_name_bad_length' => '用户名长度必须为2-64个字符.',
-		'error_user_name_invalid' => '用户名只允许使用字母 (a-z, A-Z), 数字 (0-9) 及下划线 (_).',
+		'error_user_name_invalid' => '用户名只允许使用字母 (a-z, A-Z), 数字 (0-9), 點（。） 及下划线 (_).',
 		'error_user_name_exists' => '该用户名已存在.',
 		'error_user_email_bad_length' => '电子邮箱长度必须为5-255个字符.',
 		'error_user_email_invalid' => '无效的邮箱地址.',
@@ -113,6 +125,9 @@ $sm_lang = array(
 		'sms' => '短信',
 		'pushover' => 'Pushover',
 		'no_logs' => '没有日志',
+		'clear' => 'Clear log',
+		'delete_title' => 'Delete log',
+		'delete_message' => 'Are you sure you want to delete <b>all</b> logs?',
 	),
 	'servers' => array(
 		'server' => '业务',
@@ -139,6 +154,7 @@ $sm_lang = array(
 		'pattern_description' => '如果在网站上未找到对应匹配内容, 则标记该网站为离线. 支持正则表达式.',
 		'last_check' => '最后检查',
 		'last_online' => '最后在线',
+		'last_offline' => 'Last offline',
 		'monitoring' => '监控',
 		'no_monitoring' => '未监控',
 		'email' => '邮件',
@@ -205,17 +221,6 @@ $sm_lang = array(
 		'email_smtp_noauth' => '留空为无验证',
 		'sms_status' => '允许发送短信SMS?',
 		'sms_gateway' => '短信SMS发送网关',
-		'sms_gateway_mosms' => 'Mosms',
-		'sms_gateway_mollie' => 'Mollie',
-		'sms_gateway_spryng' => 'Spryng',
-		'sms_gateway_inetworx' => 'Inetworx',
-		'sms_gateway_clickatell' => 'Clickatell',
-		'sms_gateway_textmarketer' => 'Textmarketer',
-		'sms_gateway_smsglobal' => 'SMSGlobal',
-		'sms_gateway_octopush' => 'Octopush',
-		'sms_gateway_smsit' => 'Smsit',
-		'sms_gateway_freevoipdeal' => 'FreeVoipDeal',
-		'sms_gateway_nexmo' => 'Nexmo',
 		'sms_gateway_username' => 'SMS网关用户名',
 		'sms_gateway_password' => 'SMS网关密码',
 		'sms_from' => '发信人电话号',
@@ -225,14 +230,14 @@ $sm_lang = array(
 		'pushover_api_token' => 'Pushover API Token',
 		'pushover_api_token_description' => '请先 <a href="%1$s" target="_blank">注册Pushover</a> 并获取 Api Token.',
 		'alert_type' => '如果想要收到提醒请选中此项.',
-        'alert_type_description' => '<b>状态变化:</b> '.
-		    '业务 online -> offline 或 offline -> online 的状态变化将会收到提醒.<br/>'.
-		    '<br /><b>离线状态:</b> '.
-		    '服务器首次发生离线状态将会收到提醒 ，如：'.
-		    'cronjob 设定为15分钟执行一次， 服务器从1:00-6:00一直处于当状态'.
-		    '那么你将于1:00首次发现脱机时收到一条提醒，之后不会重复提醒.<br/>'.
-		    '<br><b>总是提醒:</b> '.
-		    '每次脚本执行或站点离线(即使站点离线很久已提醒过)均发送提醒.',
+		'alert_type_description' => '<b>状态变化:</b> '.
+			'业务 online -> offline 或 offline -> online 的状态变化将会收到提醒.<br/>'.
+			'<br /><b>离线状态:</b> '.
+			'服务器首次发生离线状态将会收到提醒 ，如：'.
+			'cronjob 设定为15分钟执行一次， 服务器从1:00-6:00一直处于当状态'.
+			'那么你将于1:00首次发现脱机时收到一条提醒，之后不会重复提醒.<br/>'.
+			'<br><b>总是提醒:</b> '.
+			'每次脚本执行或站点离线(即使站点离线很久已提醒过)均发送提醒.',
 		'alert_type_status' => '状态变化',
 		'alert_type_offline' => '离线状态',
 		'alert_type_always' => '总是提醒',
@@ -270,7 +275,7 @@ $sm_lang = array(
 		'email_sent' => '发送邮件',
 		'email_error' => '发送出错',
 		'sms_sent' => '发送短信',
-		'sms_error' => '短信发送出错',
+		'sms_error' => '短信发送出错 %s',
 		'sms_error_nomobile' => '无法发送短信: 您的账号未设置有效手机号码.',
 		'pushover_sent' => '发送Pushover通知',
 		'pushover_error' => 'Pushover通知发送出错: %s',
@@ -287,11 +292,11 @@ $sm_lang = array(
 		'off_email_body' => "无法连接到以下服务器:<br/><br/>服务器: %LABEL%<br/>IP: %IP%<br/>Port: %PORT%<br/>错误: %ERROR%<br/>日期: %DATE%",
 		'off_pushover_title' => '服务器 \'%LABEL%\' 宕机',
 		'off_pushover_message' => "无法连接到以下服务器:<br/><br/>服务器: %LABEL%<br/>IP: %IP%<br/>Port: %PORT%<br/>错误: %ERROR%<br/>日期: %DATE%",
-		'on_sms' => '服务器 \'%LABEL%\' 运行中: ip=%IP%, port=%PORT%',
+		'on_sms' => '服务器 \'%LABEL%\' 运行中: ip=%IP%, port=%PORT%, it was down for %LAST_OFFLINE_DURATION%',
 		'on_email_subject' => 'IMPORTANT: 服务器 \'%LABEL%\' 运行中',
-		'on_email_body' => "服务器 '%LABEL%' 恢复运行:<br/><br/>服务器: %LABEL%<br/>IP: %IP%<br/>Port: %PORT%<br/>日期: %DATE%",
+		'on_email_body' => "服务器 '%LABEL%' 恢复运行, it was down for %LAST_OFFLINE_DURATION%:<br/><br/>服务器: %LABEL%<br/>IP: %IP%<br/>Port: %PORT%<br/>日期: %DATE%",
 		'on_pushover_title' => '服务器 \'%LABEL%\' 运行中',
-		'on_pushover_message' => "服务器 '%LABEL%' 恢复运行:<br/><br/>服务器: %LABEL%<br/>IP: %IP%<br/>Port: %PORT%<br/>日期: %DATE%",
+		'on_pushover_message' => "服务器 '%LABEL%' 恢复运行, it was down for %LAST_OFFLINE_DURATION%:<br/><br/>服务器: %LABEL%<br/>IP: %IP%<br/>Port: %PORT%<br/>日期: %DATE%",
 	),
 	'login' => array(
 		'welcome_usermenu' => '欢迎, %user_name%',
